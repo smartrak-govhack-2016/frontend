@@ -1,0 +1,12 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/smartrak/mapbox-gl-js-typescript/master/typings.json",
+    "raw": "github:smartrak/mapbox-gl-js-typescript/typings.json",
+    "main": "mapbox-gl.d.ts",
+    "version": "0.0.18",
+    "global": false,
+    "name": "mapbox-gl",
+    "type": "typings"
+  }
+}

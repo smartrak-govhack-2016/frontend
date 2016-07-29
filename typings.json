@@ -1,0 +1,8 @@
+{
+  "globalDependencies": {
+    "geojson": "registry:dt/geojson#0.0.0+20160514174238"
+  },
+  "dependencies": {
+    "mapbox-gl": "github:smartrak/mapbox-gl-js-typescript/typings.json"
+  }
+}

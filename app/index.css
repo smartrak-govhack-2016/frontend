@@ -1,0 +1,33 @@
+body {
+	margin:0; 
+	padding:0;
+}
+
+body {
+	font-family: 'Voltaire'
+}
+#top {
+	width: 100%;
+	height: 70px;
+	font-size: 50px;
+}
+#logo {
+	width: 50px;
+}
+#logotext {
+	display: inline-block;
+}
+#logo, #logotext {
+	vertical-align: middle;
+}
+
+#map, #phaser {
+	position: absolute;
+	top: 70px; 
+	width: 100%;
+	height: calc(100% - 70px);
+}
+#phaser { 
+	pointer-events: none
+}
+
