@@ -32,7 +32,7 @@
 <body>
 
     <div id="top">
-        <img id="logo" src="ic_directions_bike_black_24px.svg" />
+        <img id="logo" src="ic_directions_bike_white_24px.svg" />
         <div id="logotext">Bicycle Bicycle</div>
         <button type="button" id="btn-datasources" class="btn btn-xs btn-info" data-toggle="modal" data-target="#modal-data-sources">View data sources used</button>
         <button type="button" id="btn-howitworks" class="btn btn-xs btn-info" data-toggle="modal" data-target="#modal-how-it-works">How it works</button>
@@ -44,6 +44,11 @@
             <span>Click on the map to choose your start location</span>
             <button id="start-at-my-location" class="btn btn-xs btn-success">Start at my Location</button>
         </div>
+    </div>
+    <div id="route-details">
+        <b>Route Length:</b> 10km<br/>
+        <b>Estimated Travel Time:</b> 1 hour<br/>
+        <a href="#" onclick="alert('coming soon'); return false">Printable Directions Map</a>
     </div>
 
     <!-- Modal: Data Sources Used -->

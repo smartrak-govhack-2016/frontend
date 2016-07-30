@@ -11,6 +11,7 @@ body {
 	width: 100%;
 	height: 60px;
 	font-size: 50px;
+	background-color: rgb(87, 47, 109);
 }
 #logo {
 	width: 50px;
@@ -18,6 +19,7 @@ body {
 }
 #logotext {
 	display: inline-block;
+	color: white;
 }
 #logo {
 	position: relative;
@@ -29,6 +31,7 @@ body {
 }
 
 #instructions-container {
+	pointer-events: none;
 	position: relative;
 	display: block;
 
@@ -36,6 +39,7 @@ body {
 	text-align: center;
 }
 #instructions {
+	pointer-events: all;
 	display: inline-block;
 	border-radius:6px;
 	margin-top:4px;
@@ -48,13 +52,24 @@ body {
 text-shadow: rgb(0, 0, 0) 2px 0px 0px, rgb(0, 0, 0) 1px 0px 0px, rgb(0, 0, 0) 1px 1px 0px, rgb(0, 0, 0) 0px 2px 0px, rgb(0, 0, 0) 0px 1px 0px, rgb(0, 0, 0) -1px 1px 0px, rgb(0, 0, 0) -1px 0px 0px, rgb(0, 0, 0) -1px 0px 0px, rgb(0, 0, 0) -1px -1px 0px, rgb(0, 0, 0) 0px -1px 0px, rgb(0, 0, 0) 0px -1px 0px, rgb(0, 0, 0) 1px -1px 0px, rgb(0, 0, 0) 1px 0px 0px;
 
 	height: 30px;
-
 }
 #instructions .btn {
 	margin-right: 2px;
 }
 #instructions span {
 	vertical-align: middle;
+}
+
+#route-details {
+	display: none;
+	position:absolute;
+	left: 0;
+	bottom: 0;
+	z-index: 1000;
+	padding: 6px;
+	background-color:white;
+
+	border-top-right-radius:8px
 }
 
 #map, #phaser {

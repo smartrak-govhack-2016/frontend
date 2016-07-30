@@ -73,6 +73,8 @@ export = class App {
 		});
 
 		new ToolTip(poly);
+
+		document.getElementById('route-details').style.display = 'block';
 	}
 
 	reroute(): void {
