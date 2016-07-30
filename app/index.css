@@ -101,17 +101,17 @@ text-shadow: rgb(0, 0, 0) 2px 0px 0px, rgb(0, 0, 0) 1px 0px 0px, rgb(0, 0, 0) 1p
 	margin-top: -10px;
 	margin-left: 10px;
 }
-#btn-datasources {
+#btn-howitworks {
 	position: absolute;
 	right: 5px;
 	top: 6px;
 }
-#btn-howitworks {
+#btn-safety {
 	position: absolute;
 	right: 5px;
 	top: 34px;
 }
 
-#btn-datasources, #btn-howitworks {
+#btn-safety, #btn-howitworks {
 	width: 120px;
 }
