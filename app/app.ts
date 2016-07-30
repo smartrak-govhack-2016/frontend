@@ -1,7 +1,21 @@
 declare function require(filename: string): string;
 let markerStartFile = require('./icons/marker-start.png')
 
+import BadPlacesOverlay = require('./badPlacesOverlay');
 import ToolTip = require('./toolTip');
+
+interface Segment {
+	Start: {
+		Lat: number,
+		Lon: number
+	};
+	End: {
+		Lat: number,
+		Lon: number
+	};
+	SafetyRating: number;
+	StreetName: string;
+}
 
 export = class App {
 
@@ -20,21 +34,23 @@ export = class App {
 
 		document.getElementById('start-at-my-location').addEventListener('click', (ev) => this.createStartMarker(new L.LatLng(-37.787383, 175.319811)));
 		//this.game = new Phaser.Game('100%', '100%', Phaser.AUTO, 'phaser', this, true);
+
+		new BadPlacesOverlay(map);
 	}
 
 	createStartMarker(latlng: L.LatLng): void {
 
-			let icon = L.AwesomeMarkers.icon({
-				prefix: "glyphicon",
-				markerColor: "green",
-				icon: "play"
-			});
-			this.startMarker = new L.Marker(latlng, {
-				draggable: true,
-				icon: icon
-			});
-			this.map.addLayer(this.startMarker);
-			this.instructionsDiv.innerHTML = "<span>Click the map to choose your destination</span>";
+		let icon = L.AwesomeMarkers.icon({
+			prefix: "glyphicon",
+			markerColor: "green",
+			icon: "play"
+		});
+		this.startMarker = new L.Marker(latlng, {
+			draggable: true,
+			icon: icon
+		});
+		this.map.addLayer(this.startMarker);
+		this.instructionsDiv.innerHTML = "<span>Click the map to choose your destination</span>";
 	}
 
 	mapClick(e: L.LeafletMouseEvent) {
@@ -55,13 +71,42 @@ export = class App {
 
 			this.startMarker.on('dragend', () => this.reroute());
 			this.endMarker.on('dragend', () => this.reroute());
-			setTimeout(() => this.fakeRoute(), 1000);
+			this.findRoute();
 		}
 	}
 
-	fakeRoute(): void {
+	findRoute(): void {
+		this.showRoute(this.myFakeRoute);
+
+	}
+
+	realRoute(): void {
+		//http://localhost:53167/v1/route/37/175/37/175
+		$.ajax('http://localhost:53167/v1/route/' +
+			this.startMarker.getLatLng().lat + "/" +
+			this.startMarker.getLatLng().lng + "/" +
+			this.endMarker.getLatLng().lat + "/" +
+			this.endMarker.getLatLng().lng + "/",
+			{})
+			.done((res) => {
+				//res is the data, like myFakeRoute
+				console.log('done', res);
+			});
+		//
+
+
+	}
+
+	showRoute(route: Array<Segment>): void {
 		this.instructionsDiv.innerHTML = "<span>Route found! Drag markers to modify.</span>";
-		let poly = new L.Polyline([this.startMarker.getLatLng(), this.endMarker.getLatLng()], {
+
+		//let poly = new L.Polyline([this.startMarker.getLatLng(), this.endMarker.getLatLng()], {
+		let points = new Array<L.LatLng>();
+		points.push(new L.LatLng(route[0].Start.Lat, route[0].End.Lon));
+		route.forEach(p => {
+			points.push(new L.LatLng(p.End.Lat, p.End.Lon))
+		})
+		let poly = new L.Polyline(points, {
 			weight: 5
 		});
 		this.routeLine = poly;
@@ -72,33 +117,269 @@ export = class App {
 			snakingSpeed: 100
 		});
 
-		new ToolTip(poly);
+		new ToolTip(poly, 'todo');
 
 		document.getElementById('route-details').style.display = 'block';
 	}
 
 	reroute(): void {
 		this.map.removeLayer(this.routeLine);
-		this.fakeRoute();
+		this.findRoute();
 	}
 
-	/*
-		preload() {
-			this.game.stage.disableVisibilityChange = true;
-	
-			this.game.load.image('marker-start', markerStartFile);
+	myFakeRoute = <Array<Segment>>[{
+		"Start": {
+			"Lat": - 37.7698995,
+			"Lon": 175.2820704
+		},
+		"End": {
+			"Lat": - 37.7689713,
+			"Lon": 175.2815321
+		},
+		"SafetyRating": 0,
+		"StreetName": null
+	}, {
+			"Start": {
+				"Lat": - 37.770141,
+				"Lon": 175.2822105
+			},
+			"End": {
+				"Lat": - 37.7698995,
+				"Lon": 175.2820704
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7707221,
+				"Lon": 175.2825336
+			},
+			"End": {
+				"Lat": - 37.770141,
+				"Lon": 175.2822105
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7708784,
+				"Lon": 175.2826205
+			},
+			"End": {
+				"Lat": - 37.7707221,
+				"Lon": 175.2825336
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7708784,
+				"Lon": 175.2826205
+			},
+			"End": {
+				"Lat": - 37.7707779,
+				"Lon": 175.2830581
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7707779,
+				"Lon": 175.2830581
+			},
+			"End": {
+				"Lat": - 37.7703148,
+				"Lon": 175.2850486
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7703148,
+				"Lon": 175.2850486
+			},
+			"End": {
+				"Lat": - 37.7697132,
+				"Lon": 175.2875627
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7697132,
+				"Lon": 175.2875627
+			},
+			"End": {
+				"Lat": - 37.7695476,
+				"Lon": 175.2884069
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7695476,
+				"Lon": 175.2884069
+			},
+			"End": {
+				"Lat": - 37.7695622,
+				"Lon": 175.2885671
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7695622,
+				"Lon": 175.2885671
+			},
+			"End": {
+				"Lat": - 37.7696036,
+				"Lon": 175.2886811
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7696036,
+				"Lon": 175.2886811
+			},
+			"End": {
+				"Lat": - 37.7696718,
+				"Lon": 175.2887643
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7693479,
+				"Lon": 175.2899289
+			},
+			"End": {
+				"Lat": - 37.7696718,
+				"Lon": 175.2887643
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7694088,
+				"Lon": 175.2899628
+			},
+			"End": {
+				"Lat": - 37.7693479,
+				"Lon": 175.2899289
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7694088,
+				"Lon": 175.2899628
+			},
+			"End": {
+				"Lat": - 37.7691342,
+				"Lon": 175.2911558
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7691996,
+				"Lon": 175.2911875
+			},
+			"End": {
+				"Lat": - 37.7691342,
+				"Lon": 175.2911558
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7691996,
+				"Lon": 175.2911875
+			},
+			"End": {
+				"Lat": - 37.7688219,
+				"Lon": 175.2925562
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7688219,
+				"Lon": 175.2925562
+			},
+			"End": {
+				"Lat": - 37.7684394,
+				"Lon": 175.2924627
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7684394,
+				"Lon": 175.2924627
+			},
+			"End": {
+				"Lat": - 37.7682788,
+				"Lon": 175.2924241
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7682788,
+				"Lon": 175.2924241
+			},
+			"End": {
+				"Lat": - 37.7681149,
+				"Lon": 175.2926071
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7681149,
+				"Lon": 175.2926071
+			},
+			"End": {
+				"Lat": - 37.767906,
+				"Lon": 175.2933673
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7680795,
+				"Lon": 175.2934527
+			},
+			"End": {
+				"Lat": - 37.767906,
+				"Lon": 175.2933673
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7687431,
+				"Lon": 175.2937535
+			},
+			"End": {
+				"Lat": - 37.7680795,
+				"Lon": 175.2934527
+			},
+			"SafetyRating": 0,
+			"StreetName": null
+		}, {
+			"Start": {
+				"Lat": - 37.7699164,
+				"Lon": 175.2942943
+			},
+			"End": {
+				"Lat": - 37.7687431,
+				"Lon": 175.2937535
+			},
+			"SafetyRating": 0,
+			"StreetName": null
 		}
-	
-		//Phaser
-		create() {
-			let pos = this.map.project([175.268, -37.771])
-			this.marker = this.game.add.sprite(pos.x, pos.y, 'marker-start');
-			this.marker.anchor.set(0.5, 1);
-		}
-	
-		//Phaser
-		update() {
-			let pos = this.map.project([175.268, -37.771])
-			this.marker.position.set(pos.x, pos.y);
-		}*/
+	];
 }

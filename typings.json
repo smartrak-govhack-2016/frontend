@@ -1,6 +1,7 @@
 {
   "globalDependencies": {
     "geojson": "registry:dt/geojson#0.0.0+20160514174238",
+    "jquery": "registry:dt/jquery#1.10.0+20160704162008",
     "leaflet": "registry:dt/leaflet#1.0.0+20160630180443",
     "leaflet.awesome-markers": "registry:dt/leaflet.awesome-markers#2.0.0+20160316103212"
   }

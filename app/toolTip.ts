@@ -6,7 +6,7 @@ interface EventedLayer {
 export = class ToolTip {
 	div: HTMLDivElement;
 
-	constructor(private layer: EventedLayer) {
+	constructor(private layer: EventedLayer, private text: string) {
 		layer.on('mouseover', (e) => this.mouseover(e));
 		layer.on('mousemove', (e) => this.mousemove(e));
 		layer.on('mouseout', (e) => this.mouseout(e));
@@ -15,7 +15,7 @@ export = class ToolTip {
 	mouseover(e: L.LeafletMouseEvent) {
 		this.div = document.createElement('div');
 		this.div.className = "dtooltip";
-		this.div.innerHTML="blah";
+		this.div.innerHTML= this.text;
 		this.div.style.left = e.originalEvent.clientX + "px";
 		this.div.style.top = e.originalEvent.clientY + "px";
 		document.getElementById('phaser').appendChild(this.div);
