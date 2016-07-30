@@ -7,6 +7,7 @@ body {
 	font-family: 'Voltaire'
 }
 #top {
+	position:relative;
 	width: 100%;
 	height: 70px;
 	font-size: 50px;
@@ -29,6 +30,9 @@ body {
 
 	background-color: white;
 	padding: 2px;
+
+	z-index: 1000;
+	float: right;
 }
 
 #map, #phaser {
@@ -41,3 +45,8 @@ body {
 	pointer-events: none
 }
 
+#btn-datasources {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+}

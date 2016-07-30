@@ -1,8 +1,7 @@
 {
   "globalDependencies": {
-    "geojson": "registry:dt/geojson#0.0.0+20160514174238"
-  },
-  "dependencies": {
-    "mapbox-gl": "github:smartrak/mapbox-gl-js-typescript/typings.json"
+    "geojson": "registry:dt/geojson#0.0.0+20160514174238",
+    "leaflet": "registry:dt/leaflet#1.0.0+20160630180443",
+    "leaflet.awesome-markers": "registry:dt/leaflet.awesome-markers#2.0.0+20160316103212"
   }
 }

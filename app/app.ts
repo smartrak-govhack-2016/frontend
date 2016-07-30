@@ -4,56 +4,46 @@ let markerStartFile = require('./icons/marker-start.png')
 export = class App {
 
 	//game: Phaser.Game;
-
 	//marker: Phaser.Sprite;
 
-	isMouseOverStart = false;
+	startMarker: L.Marker = null;
+	endMarker: L.Marker = null;
 
-	constructor(public map: mapboxgl.Map) {
-		var canvas = map.getCanvasContainer();
+	instructionsDiv: HTMLDivElement;
 
-		this.createPoint('start', new mapboxgl.LngLat(175.268, -37.771));
-
-		map.on('mousemove', function (e: mapboxgl.MapMouseEvent) {
-			var features = map.queryRenderedFeatures(e.point, { layers: ['start'] });
-
-			if (features.length) {
-				this.isMouseOverStart = true;
-				map.dragPan.disable();
-			} else {
-				this.isMouseOverStart = false;
-				map.dragPan.enable();
-			}
-		});
-		map.addLayer({
-			"id": "start",
-			"type": "circle",
-			"source": "start",
-			"paint": {
-				"circle-radius": 10,
-				"circle-color": "#3887be"
-			}
-		});
+	constructor(public map: L.Map) {
+		this.instructionsDiv = <HTMLDivElement>document.getElementById('instructions');
+		map.on('click', (e) => this.mapClick(<L.LeafletMouseEvent>e));
 
 		//this.game = new Phaser.Game('100%', '100%', Phaser.AUTO, 'phaser', this, true);
 	}
 
-	createPoint(key: string, lnglat: mapboxgl.LngLat) {
-		var geojson = {
-			"type": "FeatureCollection",
-			"features": [{
-				"type": "Feature",
-				"geometry": {
-					"type": "Point",
-					"coordinates": [lnglat.lng, lnglat.lat]
-				}
-			}]
-		};
-		//TODO FUCK
-		(<any>(this.map)).addSource(key, {
-			"type": "geojson",
-			"data": geojson
-		});
+	mapClick(e: L.LeafletMouseEvent) {
+		if (!this.startMarker) {
+			let icon = L.AwesomeMarkers.icon({
+				prefix: "glyphicon",
+				markerColor: "green",
+				icon: "play"
+			});
+			this.startMarker = new L.Marker(e.latlng, {
+				draggable: true,
+				icon: icon
+			});
+			this.map.addLayer(this.startMarker);
+			this.instructionsDiv.innerHTML = "Click the map to choose your destination";
+		} else if (!this.endMarker) {
+			let icon = L.AwesomeMarkers.icon({
+				prefix: "glyphicon",
+				markerColor: "red",
+				icon: "stop"
+			})
+			this.endMarker = new L.Marker(e.latlng, {
+				draggable: true,
+				icon: icon
+			});
+			this.map.addLayer(this.endMarker);
+			this.instructionsDiv.innerHTML = "Loading route...";
+		}
 	}
 
 	/*

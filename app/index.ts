@@ -3,34 +3,20 @@ import App = require('./app');
 declare function require(filename: string): void;
 require('./index.css');
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiZGF2ZWxlYXZlciIsImEiOiJjaW15ZHB2azAwM3lidXJra2V1dWJyZHl3In0.BcJAOnQQumtT9xUAlgwvaw';
-var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/light-v9',
-    center: [175.268, -37.771], zoom: 11,
+let map = new L.Map('map', {
+    center: new L.LatLng(-37.771, 175.268),
+	zoom: 11,
 
-    attributionControl: true
-});
-
-let mapLoaded = false;
-let fontLoaded = false;
-
-map.on('load', function () {
-    mapLoaded = true;
-
-    if (fontLoaded) {
-        new App(map);
-    }
-
+	layers:
+	[L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+	})]
 });
 
 WebFont.load({
     google: { families: ['Voltaire::latin'] },
     active: () => {
-        fontLoaded = true;
-        if (mapLoaded) {
-            new App(map);
-        }
+		new App(map);
     }
 });
 
