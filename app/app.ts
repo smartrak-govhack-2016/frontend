@@ -77,6 +77,8 @@ export = class App {
 			this.btnCircle.classList.remove('active');
 		}
 
+        this.instructionsDiv.innerHTML = '<span>Click on the map to choose your start location</span>';
+
 		this.mode = mode;
 	}
 
