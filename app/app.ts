@@ -40,9 +40,6 @@ export = class App {
 		this.instructionsDiv = <HTMLDivElement>document.getElementById('instructions');
 		map.on('click', (e) => this.mapClick(<L.LeafletMouseEvent>e));
 
-		document.getElementById('start-at-my-location').addEventListener('click', (ev) => this.createStartMarker(new L.LatLng(-37.787383, 175.319811)));
-		//this.game = new Phaser.Game('100%', '100%', Phaser.AUTO, 'phaser', this, true);
-
 		new BadPlacesOverlay(map);
 
 		this.btnCircle = <HTMLButtonElement>document.getElementById('btn-circle');
@@ -55,7 +52,7 @@ export = class App {
 		this.modeSwitch('p2p');
 	}
 
-	modeSwitch(mode: 'circle' | 'p2p') {
+	tidyUp() {
 		if (this.startMarker) {
 			this.map.removeLayer(this.startMarker);
 			this.startMarker = null;
@@ -64,10 +61,18 @@ export = class App {
 			this.map.removeLayer(this.endMarker);
 			this.endMarker = null;
 		}
+		this.tidyUpRoute();
+	}
+	tidyUpRoute() {
 		if (this.routeLine) {
 			this.map.removeLayer(this.routeLine);
 			this.routeLine = null;
 		}
+
+	}
+
+	modeSwitch(mode: 'circle' | 'p2p') {
+		this.tidyUp();
 
 		if (mode == 'circle') {
 			this.btnCircle.classList.add('active');
@@ -77,7 +82,8 @@ export = class App {
 			this.btnCircle.classList.remove('active');
 		}
 
-        this.instructionsDiv.innerHTML = '<span>Click on the map to choose your start location</span>';
+        this.instructionsDiv.innerHTML = '<span>Click on the map to choose your start location</span> <button id="start-at-my-location" class="btn btn-xs btn-success">Start at my Location</button>';
+		document.getElementById('start-at-my-location').addEventListener('click', (ev) => this.createStartMarker(new L.LatLng(-37.787383, 175.319811)));
 
 		this.mode = mode;
 	}
@@ -96,7 +102,7 @@ export = class App {
 		this.map.addLayer(this.startMarker);
 
 		if (this.mode == 'p2p') {
-			this.instructionsDiv.innerHTML = "<span>Click the map to choose your destination</span>";
+			this.instructionsDiv.innerHTML = '<span>Click the map to choose your destination</span>';
 		} else {
 			this.findRoute();
 			this.startMarker.on('dragend', () => this.reroute());
@@ -104,9 +110,10 @@ export = class App {
 	}
 
 	mapClick(e: L.LeafletMouseEvent) {
-		if (!this.startMarker) {
+		if (this.mode == 'circle' || !this.startMarker) {
+			this.tidyUp();
 			this.createStartMarker(e.latlng);
-		} else if (!this.endMarker) {
+		} else if (this.mode == 'p2p' && !this.endMarker) {
 			let icon = L.AwesomeMarkers.icon({
 				prefix: "glyphicon",
 				markerColor: "red",
@@ -159,6 +166,7 @@ export = class App {
 	}
 
 	showRoute(route: Array<Segment>): void {
+		this.tidyUpRoute();
 		this.instructionsDiv.innerHTML = "<span>Route found! Drag markers to modify.</span>";
 
 		//let poly = new L.Polyline([this.startMarker.getLatLng(), this.endMarker.getLatLng()], {
