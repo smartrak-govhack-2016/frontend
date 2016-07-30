@@ -30,7 +30,7 @@ body {
 	top: -6px;
 }
 
-#instructions-container {
+#instructions-container, #controls-container {
 	pointer-events: none;
 	position: relative;
 	display: block;
@@ -60,6 +60,11 @@ text-shadow: rgb(0, 0, 0) 2px 0px 0px, rgb(0, 0, 0) 1px 0px 0px, rgb(0, 0, 0) 1p
 	vertical-align: middle;
 }
 
+#controls {
+	pointer-events: all;
+	display: inline-block;
+	margin-top:4px;
+}
 #route-details {
 	display: none;
 	position:absolute;

@@ -31,6 +31,11 @@ export = class App {
 
 	instructionsDiv: HTMLDivElement;
 
+	btnCircle: HTMLButtonElement;
+	btnP2P: HTMLButtonElement;
+
+	mode: 'circle' | 'p2p';
+
 	constructor(public map: L.Map) {
 		this.instructionsDiv = <HTMLDivElement>document.getElementById('instructions');
 		map.on('click', (e) => this.mapClick(<L.LeafletMouseEvent>e));
@@ -39,6 +44,40 @@ export = class App {
 		//this.game = new Phaser.Game('100%', '100%', Phaser.AUTO, 'phaser', this, true);
 
 		new BadPlacesOverlay(map);
+
+		this.btnCircle = <HTMLButtonElement>document.getElementById('btn-circle');
+		this.btnP2P = <HTMLButtonElement>document.getElementById('btn-p2p');
+
+		this.btnCircle.addEventListener('click', () => this.modeSwitch('circle'));
+		this.btnP2P.addEventListener('click', () => this.modeSwitch('p2p'));
+
+		//TODO: Initial mode
+		this.modeSwitch('p2p');
+	}
+
+	modeSwitch(mode: 'circle' | 'p2p') {
+		if (this.startMarker) {
+			this.map.removeLayer(this.startMarker);
+			this.startMarker = null;
+		}
+		if (this.endMarker) {
+			this.map.removeLayer(this.endMarker);
+			this.endMarker = null;
+		}
+		if (this.routeLine) {
+			this.map.removeLayer(this.routeLine);
+			this.routeLine = null;
+		}
+
+		if (mode == 'circle') {
+			this.btnCircle.classList.add('active');
+			this.btnP2P.classList.remove('active');
+		} else { //p2p
+			this.btnP2P.classList.add('active');
+			this.btnCircle.classList.remove('active');
+		}
+
+		this.mode = mode;
 	}
 
 	createStartMarker(latlng: L.LatLng): void {
@@ -53,7 +92,13 @@ export = class App {
 			icon: icon
 		});
 		this.map.addLayer(this.startMarker);
-		this.instructionsDiv.innerHTML = "<span>Click the map to choose your destination</span>";
+
+		if (this.mode == 'p2p') {
+			this.instructionsDiv.innerHTML = "<span>Click the map to choose your destination</span>";
+		} else {
+			this.findRoute();
+			this.startMarker.on('dragend', () => this.reroute());
+		}
 	}
 
 	mapClick(e: L.LeafletMouseEvent) {
@@ -70,7 +115,6 @@ export = class App {
 				icon: icon
 			});
 			this.map.addLayer(this.endMarker);
-			this.instructionsDiv.innerHTML = "<span>Loading route...</span>";
 
 			this.startMarker.on('dragend', () => this.reroute());
 			this.endMarker.on('dragend', () => this.reroute());
@@ -79,37 +123,37 @@ export = class App {
 	}
 
 	findRoute(): void {
-		//this.showRoute(this.myFakeRoute);
-		this.realRoute();
+		this.instructionsDiv.innerHTML = "<span>Loading route...</span>";
+		setTimeout(() => this.showRoute(this.myFakeRoute), 1000);
+		//this.realRoute();
 	}
 
 	realRoute(): void {
 		//http://localhost:53167/v1/route/37/175/37/175
-/*
-		$.ajax('http://localhost:53167/v1/circle/' +
-			this.startMarker.getLatLng().lat + "/" +
-			this.startMarker.getLatLng().lng + "/",
-			{})
-			.done((res) => {
-				//res is the data, like myFakeRoute
-				console.log('done', res);
-				this.showRoute(res);
-			});
-*/
-		$.ajax('http://localhost:53167/v1/route/' +
-			this.startMarker.getLatLng().lat + "/" +
-			this.startMarker.getLatLng().lng + "/" +
-			this.endMarker.getLatLng().lat + "/" +
-			this.endMarker.getLatLng().lng + "/",
-			{})
-			.done((res) => {
-				//res is the data, like myFakeRoute
-				console.log('done', res);
-				this.showRoute(res);
-			});
-		//
 
-
+		if (this.mode == 'circle') {
+			$.ajax('http://localhost:53167/v1/circle/' +
+				this.startMarker.getLatLng().lat + "/" +
+				this.startMarker.getLatLng().lng + "/",
+				{})
+				.done((res) => {
+					//res is the data, like myFakeRoute
+					console.log('done', res);
+					this.showRoute(res);
+				});
+		} else {
+			$.ajax('http://localhost:53167/v1/route/' +
+				this.startMarker.getLatLng().lat + "/" +
+				this.startMarker.getLatLng().lng + "/" +
+				this.endMarker.getLatLng().lat + "/" +
+				this.endMarker.getLatLng().lng + "/",
+				{})
+				.done((res) => {
+					//res is the data, like myFakeRoute
+					console.log('done', res);
+					this.showRoute(res);
+				});
+		}
 	}
 
 	showRoute(route: Array<Segment>): void {
@@ -121,20 +165,21 @@ export = class App {
 		//points.push(new L.LatLng(route[0].Start.Lat, route[0].Start.Lon));
 
 		let dist = 0;
-		for (var i = 0; i < route.length - 1 ; i++){
+		for (var i = 0; i < route.length - 1; i++) {
 			let p = route[i];
 			points.push(new L.LatLng(p.End.Lat, p.End.Lon))
 			dist += haversine(
-				{ latitude: p.Start.Lat, longitude: p.Start.Lon},
-				{ latitude: p.End.Lat, longitude: p.End.Lon},
-				{unit: 'km'}
+				{ latitude: p.Start.Lat, longitude: p.Start.Lon },
+				{ latitude: p.End.Lat, longitude: p.End.Lon },
+				{ unit: 'km' }
 			);
 		}
-		points.push(this.endMarker.getLatLng());
-			dist += haversine(
-				{ latitude: route[i - 1].End.Lat, longitude: route[i - 1].End.Lon},
-				{ latitude: this.endMarker.getLatLng().lat, longitude: this.endMarker.getLatLng().lng},
-				{unit: 'km'});
+		let lastMarker = this.endMarker || this.startMarker;
+		points.push(lastMarker.getLatLng());
+		dist += haversine(
+			{ latitude: route[i - 1].End.Lat, longitude: route[i - 1].End.Lon },
+			{ latitude: lastMarker.getLatLng().lat, longitude: lastMarker.getLatLng().lng },
+			{ unit: 'km' });
 
 
 		let poly = new L.Polyline(points, {
@@ -151,7 +196,7 @@ export = class App {
 		new ToolTip(poly, 'todo');
 
 		document.getElementById('route-details').style.display = 'block';
-		document.getElementById('dist').innerHTML = (Math.round(dist*10)/10) +"km";
+		document.getElementById('dist').innerHTML = (Math.round(dist * 10) / 10) + "km";
 
 		let hours = dist / 12; //Bike at this speed km/h
 		let mins = Math.ceil((hours * 60) % 60);
