@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8' />
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 
     <link href='https://npmcdn.com/leaflet@1.0.0-rc.1/dist/leaflet.css' rel='stylesheet' />
     <script src="https://npmcdn.com/leaflet@1.0.0-rc.1/dist/leaflet.js"></script>
+    <script src="./L.Polyline.SnakeAnim.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
@@ -19,47 +23,92 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.4.8/phaser.js"></script>
 
 
+
     <% for (var css in htmlWebpackPlugin.files.css) { %>
-	<link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
-	<% } %>
+        <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+        <% } %>
 </head>
+
 <body>
 
     <div id="top">
         <img id="logo" src="ic_directions_bike_black_24px.svg" />
         <div id="logotext">Bicycle Bicycle</div>
         <button type="button" id="btn-datasources" class="btn btn-xs btn-info" data-toggle="modal" data-target="#modal-data-sources">View data sources used</button>
+        <button type="button" id="btn-howitworks" class="btn btn-xs btn-info" data-toggle="modal" data-target="#modal-how-it-works">How it works</button>
     </div>
     <div id='map'></div>
     <div id="phaser"></div>
-    <div id="instructions">
-        Click on the map to choose your start location
+    <div id="instructions-container">
+        <div id="instructions">
+            <span>Click on the map to choose your start location</span>
+            <button id="start-at-my-location" class="btn btn-xs btn-success">Start at my Location</button>
+        </div>
     </div>
 
     <!-- Modal: Data Sources Used -->
     <div class="modal fade" id="modal-data-sources" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Data Sources Used</h4>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Data Sources Used</h4>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li><a href="http://openstreetmap.org">OpenStreetMap</a> - Base Map and Routing.</li>
+                        <li><a href="https://data.linz.govt.nz/layer/2100-nz-walking-and-biking-tracks/">NZ Walking and Biking Tracks</li>
+                        <li><a href="https://www.nzta.govt.nz/safety/safety-resources/crash-analysis-system/">NZTA Crash Analysis System</a> - Avoid Cycle Crashes</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <ul>
-                <li><a href="http://openstreetmap.org">OpenStreetMap</a>
-                <li><a href="https://www.nzta.govt.nz/safety/safety-resources/crash-analysis-system/">NZTA Crash Analysis System</a>
-            </ul>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-        </div>
-    </div>
     </div>
 
-	<% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-	<script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
-	<% } %>
+    <!-- Modal: How it Works -->
+    <div class="modal fade" id="modal-how-it-works" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">How it Works</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Bicycle Bicycle provides a way for Bike riders to find safe bike routes.
+                    </p>
+                    <p>
+                        When we make routes, we try to avoid:
+                        <ul>
+                            <li>Known Crash Hotspots</li>
+                            <li>Roundabouts</li>
+                            <li>Highspeed roads</li>
+                        </ul>
+
+                        And we try to route you along:
+                        <ul>
+                            <li>Bicycle Paths</li>
+                            <li>Walkways (that are suitable for cyclists)</li>
+                        </ul>
+
+                        And we try send you past:
+                        <ul>
+                            <li>Parks</li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+        <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+        <% } %>
 </body>
+
 </html>

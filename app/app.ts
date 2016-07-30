@@ -1,6 +1,8 @@
 declare function require(filename: string): string;
 let markerStartFile = require('./icons/marker-start.png')
 
+import ToolTip = require('./toolTip');
+
 export = class App {
 
 	//game: Phaser.Game;
@@ -8,6 +10,7 @@ export = class App {
 
 	startMarker: L.Marker = null;
 	endMarker: L.Marker = null;
+	routeLine: L.Polyline;
 
 	instructionsDiv: HTMLDivElement;
 
@@ -15,22 +18,28 @@ export = class App {
 		this.instructionsDiv = <HTMLDivElement>document.getElementById('instructions');
 		map.on('click', (e) => this.mapClick(<L.LeafletMouseEvent>e));
 
+		document.getElementById('start-at-my-location').addEventListener('click', (ev) => this.createStartMarker(new L.LatLng(-37.787383, 175.319811)));
 		//this.game = new Phaser.Game('100%', '100%', Phaser.AUTO, 'phaser', this, true);
 	}
 
-	mapClick(e: L.LeafletMouseEvent) {
-		if (!this.startMarker) {
+	createStartMarker(latlng: L.LatLng): void {
+
 			let icon = L.AwesomeMarkers.icon({
 				prefix: "glyphicon",
 				markerColor: "green",
 				icon: "play"
 			});
-			this.startMarker = new L.Marker(e.latlng, {
+			this.startMarker = new L.Marker(latlng, {
 				draggable: true,
 				icon: icon
 			});
 			this.map.addLayer(this.startMarker);
-			this.instructionsDiv.innerHTML = "Click the map to choose your destination";
+			this.instructionsDiv.innerHTML = "<span>Click the map to choose your destination</span>";
+	}
+
+	mapClick(e: L.LeafletMouseEvent) {
+		if (!this.startMarker) {
+			this.createStartMarker(e.latlng);
 		} else if (!this.endMarker) {
 			let icon = L.AwesomeMarkers.icon({
 				prefix: "glyphicon",
@@ -42,8 +51,33 @@ export = class App {
 				icon: icon
 			});
 			this.map.addLayer(this.endMarker);
-			this.instructionsDiv.innerHTML = "Loading route...";
+			this.instructionsDiv.innerHTML = "<span>Loading route...</span>";
+
+			this.startMarker.on('dragend', () => this.reroute());
+			this.endMarker.on('dragend', () => this.reroute());
+			setTimeout(() => this.fakeRoute(), 1000);
 		}
+	}
+
+	fakeRoute(): void {
+		this.instructionsDiv.innerHTML = "<span>Route found! Drag markers to modify.</span>";
+		let poly = new L.Polyline([this.startMarker.getLatLng(), this.endMarker.getLatLng()], {
+			weight: 5
+		});
+		this.routeLine = poly;
+		this.map.addLayer(poly);
+		//https://github.com/IvanSanchez/Leaflet.Polyline.SnakeAnim
+
+		(<any>poly).snakeIn({
+			snakingSpeed: 100
+		});
+
+		new ToolTip(poly);
+	}
+
+	reroute(): void {
+		this.map.removeLayer(this.routeLine);
+		this.fakeRoute();
 	}
 
 	/*
