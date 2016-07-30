@@ -13,12 +13,22 @@ body {
 }
 #logo {
 	width: 50px;
+	margin-left: 10px;
 }
 #logotext {
 	display: inline-block;
 }
 #logo, #logotext {
 	vertical-align: middle;
+}
+
+#instructions {
+	pointer-events: none;
+	position: relative;
+	display: inline-block;
+
+	background-color: white;
+	padding: 2px;
 }
 
 #map, #phaser {

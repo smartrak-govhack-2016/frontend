@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.094"
+   height="1052.362"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="marker.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1281"
+     inkscape:window-height="769"
+     id="namedview72"
+     showgrid="false"
+     inkscape:zoom="5.0743661"
+     inkscape:cx="408.46025"
+     inkscape:cy="535.59043"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <metadata
+     id="metadata74">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4">
+    <linearGradient
+       id="b">
+      <stop
+         offset="0"
+         stop-color="#2e6c97"
+         id="stop7" />
+      <stop
+         offset="1"
+         stop-color="#3883b7"
+         id="stop9" />
+    </linearGradient>
+    <linearGradient
+       id="a">
+      <stop
+         offset="0"
+         stop-color="#126fc6"
+         id="stop12" />
+      <stop
+         offset="1"
+         stop-color="#4c9cd1"
+         id="stop14" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#a"
+       x1="351.138"
+       y1="551.589"
+       x2="351.138"
+       y2="512.928"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-2.715)"
+       id="linearGradient16" />
+    <linearGradient
+       xlink:href="#a"
+       x1="318.571"
+       y1="550.052"
+       x2="318.571"
+       y2="512.422"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(94.732 2.054)"
+       id="linearGradient18" />
+    <linearGradient
+       xlink:href="#a"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-1 0 0 1 731.268 2.054)"
+       x1="318.571"
+       y1="550.052"
+       x2="318.571"
+       y2="512.422"
+       id="linearGradient20" />
+    <linearGradient
+       xlink:href="#a"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(94.232 2.054)"
+       x1="318.571"
+       y1="550.052"
+       x2="318.571"
+       y2="512.422"
+       id="linearGradient22" />
+    <linearGradient
+       xlink:href="#a"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-28.58 -.437)"
+       x1="445.301"
+       y1="541.286"
+       x2="445.301"
+       y2="503.72"
+       id="linearGradient24" />
+    <linearGradient
+       xlink:href="#b"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(63 -.438)"
+       x1="351.748"
+       y1="522.774"
+       x2="351.748"
+       y2="503.721"
+       id="linearGradient26" />
+    <linearGradient
+       xlink:href="#a"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-28.58 -.437)"
+       x1="445.301"
+       y1="541.286"
+       x2="445.301"
+       y2="503.72"
+       id="linearGradient28" />
+    <linearGradient
+       xlink:href="#b"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(63 -.438)"
+       x1="351.748"
+       y1="522.774"
+       x2="351.748"
+       y2="503.721"
+       id="linearGradient30" />
+    <linearGradient
+       xlink:href="#a"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-28.58 -.437)"
+       x1="445.301"
+       y1="541.286"
+       x2="445.301"
+       y2="503.72"
+       id="linearGradient32" />
+    <linearGradient
+       xlink:href="#b"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(63 -.438)"
+       x1="351.748"
+       y1="522.774"
+       x2="351.748"
+       y2="503.721"
+       id="linearGradient34" />
+    <linearGradient
+       xlink:href="#a"
+       id="c"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-28.846 -.287)"
+       x1="445.301"
+       y1="541.286"
+       x2="445.301"
+       y2="503.72" />
+    <linearGradient
+       xlink:href="#b"
+       id="d"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(62.734 -.288)"
+       x1="351.748"
+       y1="522.774"
+       x2="351.748"
+       y2="503.721" />
+    <linearGradient
+       xlink:href="#a"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-28.846 -.287)"
+       x1="445.301"
+       y1="541.286"
+       x2="445.301"
+       y2="503.72"
+       id="linearGradient38" />
+    <linearGradient
+       xlink:href="#b"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(62.734 -.288)"
+       x1="351.748"
+       y1="522.774"
+       x2="351.748"
+       y2="503.721"
+       id="linearGradient40" />
+    <linearGradient
+       xlink:href="#a-72"
+       id="c-739"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-28.846 -.287)"
+       x1="445.301"
+       y1="541.286"
+       x2="445.301"
+       y2="503.72" />
+    <linearGradient
+       id="a-72">
+      <stop
+         offset="0"
+         stop-color="#c6126f"
+         id="stop3428" />
+      <stop
+         offset="1"
+         stop-color="#d14c9c"
+         id="stop3430" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#b-127"
+       id="d-12"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(62.734 -.288)"
+       x1="351.748"
+       y1="522.774"
+       x2="351.748"
+       y2="503.721" />
+    <linearGradient
+       id="b-127">
+      <stop
+         offset="0"
+         stop-color="#972e6c"
+         id="stop3434" />
+      <stop
+         offset="1"
+         stop-color="#b73883"
+         id="stop3436" />
+    </linearGradient>
+    <linearGradient
+       y2="503.72"
+       x2="445.301"
+       y1="541.286"
+       x1="445.301"
+       gradientTransform="translate(17.417798,-0.98374395)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3534"
+       xlink:href="#a-72"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="503.721"
+       x2="351.748"
+       y1="522.774"
+       x1="351.748"
+       gradientTransform="translate(108.9978,-0.98474395)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3536"
+       xlink:href="#b-127"
+       inkscape:collect="always" />
+    <linearGradient
+       xlink:href="#a-72-148"
+       id="c-739-232"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-28.846 -.287)"
+       x1="445.301"
+       y1="541.286"
+       x2="445.301"
+       y2="503.72" />
+    <linearGradient
+       id="a-72-148">
+      <stop
+         offset="0"
+         stop-color="#6fc612"
+         id="stop3574" />
+      <stop
+         offset="1"
+         stop-color="#9cd14c"
+         id="stop3576" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#b-127-239"
+       id="d-12-828"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(62.734 -.288)"
+       x1="351.748"
+       y1="522.774"
+       x2="351.748"
+       y2="503.721" />
+    <linearGradient
+       id="b-127-239">
+      <stop
+         offset="0"
+         stop-color="#6c972e"
+         id="stop3580" />
+      <stop
+         offset="1"
+         stop-color="#83b738"
+         id="stop3582" />
+    </linearGradient>
+  </defs>
+  <image
+     y="502.237"
+     x="369.375"
+     xlink:href="data:image/png;base64,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 0YvhJSIAAAAASUVORK5CYII="
+     height="41"
+     width="25"
+     id="image42" />
+  <rect
+     y="507.575"
+     x="410.279"
+     height="14.5"
+     width="12.625"
+     fill="#ffffff"
+     id="rect44"
+     inkscape:export-filename="/Users/dave/Projects/frontend/app/icons/marker-start2.png"
+     inkscape:export-xdpi="178.9839"
+     inkscape:export-ydpi="178.9839" />
+  <path
+     d="m 416.544,503.612 c -6.573,0 -12.044,5.691 -12.044,11.866 0,2.778 1.564,6.308 2.694,8.746 l 9.306,17.872 9.262,-17.872 c 1.13,-2.438 2.738,-5.791 2.738,-8.746 0,-6.175 -5.383,-11.866 -11.956,-11.866 z m -4,7.155 9.54585,4.71 -9.54585,4.679 z"
+     id="path46"
+     inkscape:connector-curvature="0"
+     style="fill:url(#c-739-232);stroke:url(#d-12-828);stroke-width:1.10000002;stroke-linecap:round"
+     sodipodi:nodetypes="sscccsscccc"
+     inkscape:export-filename="/Users/dave/Projects/frontend/app/icons/marker-start2.png"
+     inkscape:export-xdpi="178.9839"
+     inkscape:export-ydpi="178.9839" />
+  <text
+     style="line-height:125%"
+     x="403.75"
+     y="489.362"
+     font-size="4"
+     letter-spacing="0"
+     word-spacing="0"
+     font-family="Sans"
+     id="text48">
+    <tspan
+       x="403.75"
+       y="489.362"
+       id="tspan50">
+	    Use this one.
+	</tspan>
+    <tspan
+       x="403.75"
+       y="494.362"
+       id="tspan52">
+	    Select it and the area around with box select.
+	</tspan>
+    <tspan
+       x="403.75"
+       y="499.362"
+       id="tspan54">
+	    should be exactly 25x41 at 90dpi
+	</tspan>
+  </text>
+  <text
+     style="line-height:125%"
+     x="408.708"
+     y="563.751"
+     font-size="40"
+     letter-spacing="0"
+     word-spacing="0"
+     font-family="Sans"
+     id="text56">
+    <tspan
+       x="408.708"
+       y="563.751"
+       font-size="4"
+       id="tspan58">
+	    How to do the inset border:
+	</tspan>
+    <tspan
+       x="408.708"
+       y="568.751"
+       font-size="4"
+       id="tspan60">
+	    Delete the existing inset border. Select the background, duplicate.
+	</tspan>
+    <tspan
+       x="408.708"
+       y="573.751"
+       font-size="4"
+       id="tspan62">
+	    Path, Dynamic offset.
+	</tspan>
+    <tspan
+       x="408.708"
+       y="578.751"
+       font-size="4"
+       id="tspan64">
+	    Fill: None, Stroke Paint: RGBA #ffffff1f
+	</tspan>
+    <tspan
+       x="408.708"
+       y="583.751"
+       font-size="4"
+       id="tspan66">
+	    Zoom down to the top and grab the diamond, drag it down and fiddle it untill it looks in line
+	</tspan>
+    <tspan
+       x="408.708"
+       y="588.751"
+       font-size="4"
+       id="tspan68">
+	    with the main color layers border.
+	</tspan>
+  </text>
+  <path
+     d="m 416.531,504.719 c -5.944,0 -10.938,5.219 -10.938,10.75 0,2.359 1.443,5.832 2.563,8.25 l 0.031,0.031 8.313,15.969 8.25,-15.969 0.031,-0.031 c 1.135,-2.448 2.625,-5.706 2.625,-8.25 0,-5.538 -4.931,-10.75 -10.875,-10.75 z m -5.16246,4.22999 13.04199,6.52001 -13.04199,6.42147 z"
+     id="path70"
+     inkscape:connector-curvature="0"
+     style="fill:none;stroke:#ffffff;stroke-width:1.10000002;stroke-linecap:round;stroke-opacity:0.122"
+     sodipodi:nodetypes="sscccccsscccc"
+     inkscape:export-filename="/Users/dave/Projects/frontend/app/icons/marker-start2.png"
+     inkscape:export-xdpi="178.9839"
+     inkscape:export-ydpi="178.9839" />
+  <rect
+     style="fill:#ffffff"
+     id="rect3528"
+     width="12.625"
+     height="14.5"
+     x="456.54279"
+     y="506.87827"
+     inkscape:export-filename="/Users/dave/Projects/frontend/app/icons/marker-end.png"
+     inkscape:export-xdpi="89.641411"
+     inkscape:export-ydpi="89.641411" />
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:url(#linearGradient3534);stroke:url(#linearGradient3536);stroke-width:1.10000002;stroke-linecap:round"
+     id="path3530"
+     d="m 462.8078,502.91526 c -6.573,0 -12.044,5.691 -12.044,11.866 0,2.778 1.564,6.308 2.694,8.746 l 9.306,17.872 9.262,-17.872 c 1.13,-2.438 2.738,-5.791 2.738,-8.746 0,-6.175 -5.383,-11.866 -11.956,-11.866 z m 0,7.155 c 2.584,0.017 4.679,2.122 4.679,4.71 0,2.588 -2.095,4.663 -4.679,4.679 -2.584,-0.017 -4.679,-2.09 -4.679,-4.679 0,-2.588 2.095,-4.693 4.679,-4.71 z"
+     inkscape:export-filename="/Users/dave/Projects/frontend/app/icons/marker-end.png"
+     inkscape:export-xdpi="89.641411"
+     inkscape:export-ydpi="89.641411" />
+  <path
+     style="fill:none;stroke:#ffffff;stroke-width:1.10000002;stroke-linecap:round;stroke-opacity:0.122"
+     inkscape:connector-curvature="0"
+     id="path3532"
+     d="m 462.7948,504.02226 c -5.944,0 -10.938,5.219 -10.938,10.75 0,2.359 1.443,5.832 2.563,8.25 l 0.031,0.031 8.313,15.969 8.25,-15.969 0.031,-0.031 c 1.135,-2.448 2.625,-5.706 2.625,-8.25 0,-5.538 -4.931,-10.75 -10.875,-10.75 z m 0,4.969 c 3.168,0.021 5.781,2.601 5.781,5.781 0,3.18 -2.613,5.761 -5.781,5.781 -3.168,-0.02 -5.75,-2.61 -5.75,-5.781 0,-3.172 2.582,-5.761 5.75,-5.781 z"
+     inkscape:export-filename="/Users/dave/Projects/frontend/app/icons/marker-end.png"
+     inkscape:export-xdpi="89.641411"
+     inkscape:export-ydpi="89.641411" />
+</svg>

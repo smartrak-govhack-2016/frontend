@@ -74,6 +74,17 @@ declare namespace mapboxgl {
 		zoom?: number
 	}
 
+	export interface MapMouseEvent {
+		/** The event type. */
+		type: string;
+		/** The  Map object that fired the event. */
+		target: Map;
+		originalEvent: MouseEvent;
+		/** The pixel coordinates of the mouse event target, relative to the map and measured from the top left corner. */
+		point: { x: number, y: number };
+		/** The geographic location on the map of the mouse event target. */
+		lngLat: LngLat;
+	}
 	export interface Source {
 		type: "vector" | "raster" | "geojson" | "image" | "video";
 	}
@@ -102,13 +113,13 @@ declare namespace mapboxgl {
 		/** Convert an array to a LngLat object, or return an existing LngLat object unchanged. */
 		static convert(lngLat: Array<number>): LngLat;
 	}
-	
+
 	export class LngLatBounds {
 		constructor(sw: LngLat, ne: LngLat);
-		
+
 		/** Extend the bounds to include a given LngLat or LngLatBounds. */
 		extend(obj: LngLat | LngLatBounds): this;
-		
+
 		/** Get the point equidistant from this box's corners */
 		getCenter(): LngLat;
 		/** Get east edge longitude */
@@ -127,12 +138,12 @@ declare namespace mapboxgl {
 		getSouthWest(): LngLat;
 		/** Get west edge longitude */
 		getWest(): number;
-		
+
 		/** Returns a LngLatBounds as an array */
 		toArray(): Array<Array<number>>;
 		/** Return a LngLatBounds as a string */
 		toString(): string;
-		
+
 		/** Convert an array to a LngLatBounds object, or return an existing LngLatBounds object unchanged. */
 		static convert(input: LngLatBounds | Array<number> | Array<Array<number>>): LngLatBounds;
 	}
@@ -150,12 +161,28 @@ declare namespace mapboxgl {
 
 		getCenter(): LngLat;
 		getZoom(): number;
-		
+
 		jumpTo(options: CameraOptions, eventData?: EventData): this;
 
 		project(lnglat: LngLat | Array<number>): { x: number, y: number };
-		
+
 		setPitch(pitch: number, eventData?: EventData): this;
+
+		/** Returns the HTML element containing the map's <canvas> element. */
+		getCanvasContainer(): HTMLElement;
+
+		/** Filter ref: https://www.mapbox.com/mapbox-gl-style-spec/#types-filter */
+		queryRenderedFeatures(region?: { x: number, y: number } | Array<{ x: number, y: number }>, filter?: any): Array<GeoJSON.Feature<any>>;
+
+		dragPan: DragPanHandler;
+	}
+
+	class DragPanHandler {
+		constructor(map: Map);
+		isActive(): boolean;
+		isEnabled(): boolean;
+		enable(): void;
+		disable(): void;
 	}
 
 	/** TODO: Should be a class */
@@ -217,7 +244,7 @@ declare namespace mapboxgl {
 
 		//filter?:
 		layout?: FillLayout | LineLayout | SymbolLayout;
-		paint?: FillPaint | LinePaint | SymbolPaint; //TODO: Other types
+		paint?: FillPaint | LinePaint | SymbolPaint | CirclePaint; //TODO: Other types
 		//paint.* 
 	}
 
@@ -308,7 +335,16 @@ declare namespace mapboxgl {
 		"text-translate-anchor"?: "map" | "viewport";
 	}
 
+	export interface CirclePaint {
+		"circle-radius"?: number;
+		"circle-color"?: string;
+		"circle-blur"?: number;
+		"circle-opacity"?: number;
+		"circle-translate"?: Array<number>;
+		//TODO: circle-translate-anchor
+		//TODO: circle-pitch-scale
 
+	}
 
 	export abstract class Control {
 		addTo(map: Map): this;
@@ -326,7 +362,7 @@ declare namespace mapboxgl {
 		point?: Array<number>;
 		lngLat?: LngLat;
 	}
-	
+
 	export interface CameraOptions {
 		/** Map center */
 		center?: LngLat;
@@ -339,7 +375,7 @@ declare namespace mapboxgl {
 		/** If zooming, the zoom center (defaults to map center) */
 		around?: LngLat;
 	}
-	
+
 	export interface AnimationOptions {
 		/** Number in milliseconds */
 		duration?: number;
@@ -349,7 +385,7 @@ declare namespace mapboxgl {
 		/** When set to false, no animation happens */
 		animate?: boolean;
 	}
-	
+
 	export interface CameraAndAnimationOptions extends CameraOptions, AnimationOptions {
 	}
 }

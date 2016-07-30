@@ -1,4 +1,4 @@
-//import Visualiser = require('./visualiser');
+import App = require('./app');
 
 declare function require(filename: string): void;
 require('./index.css');
@@ -19,7 +19,7 @@ map.on('load', function () {
     mapLoaded = true;
 
     if (fontLoaded) {
-        //new Visualiser(map);
+        new App(map);
     }
 
 });
@@ -29,7 +29,7 @@ WebFont.load({
     active: () => {
         fontLoaded = true;
         if (mapLoaded) {
-            //new Visualiser(map);
+            new App(map);
         }
     }
 });

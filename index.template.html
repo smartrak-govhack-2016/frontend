@@ -22,6 +22,9 @@
     </div>
     <div id='map'></div>
     <div id="phaser"></div>
+    <div id="instructions">
+        Click on the map to choose your start location
+    </div>
 
 	<% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
 	<script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
