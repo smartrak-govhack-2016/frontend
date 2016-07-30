@@ -1,6 +1,6 @@
 
 import ToolTip = require('./toolTip');
-
+import HeatData = require('./heatData');
 
 export = class BadPlacesOverlay {
 	constructor(map: L.Map) {
@@ -61,9 +61,16 @@ export = class BadPlacesOverlay {
 		new ToolTip(roundaboutsWithPaths, 'Roundabout suitable for crossing');
 		map.addLayer(roundaboutsWithPaths);
 
+
+		let crashLayer = new (<any>L).HeatLayer(HeatData, { radius: 10, });
+		map.addLayer(crashLayer);
+
+
 		L.control.layers(null, {
 			'Dangerous Areas': roundaboutsWithoutPathsBlahBlah,
 			'Warning Areas': roundaboutsWithPaths,
+			'Crashes': crashLayer
 		}).addTo(map);
+
 	}
 };

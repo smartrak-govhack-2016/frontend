@@ -79,12 +79,23 @@ export = class App {
 	}
 
 	findRoute(): void {
-		this.showRoute(this.myFakeRoute);
-
+		//this.showRoute(this.myFakeRoute);
+		this.realRoute();
 	}
 
 	realRoute(): void {
 		//http://localhost:53167/v1/route/37/175/37/175
+/*
+		$.ajax('http://localhost:53167/v1/circle/' +
+			this.startMarker.getLatLng().lat + "/" +
+			this.startMarker.getLatLng().lng + "/",
+			{})
+			.done((res) => {
+				//res is the data, like myFakeRoute
+				console.log('done', res);
+				this.showRoute(res);
+			});
+*/
 		$.ajax('http://localhost:53167/v1/route/' +
 			this.startMarker.getLatLng().lat + "/" +
 			this.startMarker.getLatLng().lng + "/" +
@@ -94,6 +105,7 @@ export = class App {
 			.done((res) => {
 				//res is the data, like myFakeRoute
 				console.log('done', res);
+				this.showRoute(res);
 			});
 		//
 
@@ -105,17 +117,26 @@ export = class App {
 
 		//let poly = new L.Polyline([this.startMarker.getLatLng(), this.endMarker.getLatLng()], {
 		let points = new Array<L.LatLng>();
-		points.push(new L.LatLng(route[0].Start.Lat, route[0].End.Lon));
+		points.push(this.startMarker.getLatLng());
+		//points.push(new L.LatLng(route[0].Start.Lat, route[0].Start.Lon));
 
 		let dist = 0;
-		route.forEach(p => {
+		for (var i = 0; i < route.length - 1 ; i++){
+			let p = route[i];
 			points.push(new L.LatLng(p.End.Lat, p.End.Lon))
 			dist += haversine(
 				{ latitude: p.Start.Lat, longitude: p.Start.Lon},
 				{ latitude: p.End.Lat, longitude: p.End.Lon},
 				{unit: 'km'}
 			);
-		})
+		}
+		points.push(this.endMarker.getLatLng());
+			dist += haversine(
+				{ latitude: route[i - 1].End.Lat, longitude: route[i - 1].End.Lon},
+				{ latitude: this.endMarker.getLatLng().lat, longitude: this.endMarker.getLatLng().lng},
+				{unit: 'km'});
+
+
 		let poly = new L.Polyline(points, {
 			weight: 5
 		});
