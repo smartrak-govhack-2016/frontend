@@ -29,7 +29,6 @@ export = class BadPlacesOverlay {
 			new L.Circle(new L.LatLng(-37.781756, 175.315645), 50, danger),
 			new L.Circle(new L.LatLng(-37.780895, 175.319250), 50, danger),
 			new L.Circle(new L.LatLng(-37.731973, 175.285331), 50, danger),
-			new L.Circle(new L.LatLng(-37, 175), 50, danger),
 		]);
 		new ToolTip(roundaboutsWithoutPaths, 'Roundabout without suitable crossing area');
 		let roundaboutsWithoutPathsAndCrashes = new L.FeatureGroup([
@@ -58,14 +57,13 @@ export = class BadPlacesOverlay {
 			new L.Circle(new L.LatLng(-37.781788, 175.308749), 50, safeish),
 			new L.Circle(new L.LatLng(-37.781800, 175.305625), 50, safeish),
 			new L.Circle(new L.LatLng(-37.727268, 175.251852), 50, safeish),
-			new L.Circle(new L.LatLng(-37, 175), 50, safeish),
 		])
 		new ToolTip(roundaboutsWithPaths, 'Roundabout suitable for crossing');
 		map.addLayer(roundaboutsWithPaths);
 
 		L.control.layers(null, {
-			'Dangerous Roundabouts': roundaboutsWithoutPathsBlahBlah,
-			'Roundabouts with walkways': roundaboutsWithPaths,
+			'Dangerous Areas': roundaboutsWithoutPathsBlahBlah,
+			'Warning Areas': roundaboutsWithPaths,
 		}).addTo(map);
 	}
 };

@@ -3,9 +3,13 @@ import App = require('./app');
 declare function require(filename: string): void;
 require('./index.css');
 
+WebFont.load({
+    google: { families: ['Voltaire::latin'] },
+    active: () => {
+
 let map = new L.Map('map', {
-    center: new L.LatLng(-37.771, 175.268),
-	zoom: 11,
+    //center: new L.LatLng(-37.771, 175.268),
+	//zoom: 11,
 
 	layers:
 	[
@@ -20,11 +24,10 @@ let map = new L.Map('map', {
 	})*/
 	]
 });
+let bounds = new L.LatLngBounds({ lat: -37.813852, lng: 175.217514}, { lat: -37.723071, lng: 175.331669 });
+map.fitBounds(bounds);
 
 
-WebFont.load({
-    google: { families: ['Voltaire::latin'] },
-    active: () => {
 		new App(map);
     }
 });
