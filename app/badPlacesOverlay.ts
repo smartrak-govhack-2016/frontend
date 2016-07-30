@@ -1,6 +1,6 @@
 
 import ToolTip = require('./toolTip');
-import HeatData = require('./heatData');
+import HeatData = require('./heatDataBikes');
 
 export = class BadPlacesOverlay {
 	constructor(map: L.Map) {
@@ -62,7 +62,7 @@ export = class BadPlacesOverlay {
 		map.addLayer(roundaboutsWithPaths);
 
 
-		let crashLayer = new (<any>L).HeatLayer(HeatData, { radius: 10, });
+		let crashLayer = new (<any>L).HeatLayer(HeatData, { radius: 10, max: 0.04 });
 		map.addLayer(crashLayer);
 
 
