@@ -1,8 +1,11 @@
-declare function require(filename: string): string;
-let markerStartFile = require('./icons/marker-start.png')
+import haversine = require('haversine');
 
 import BadPlacesOverlay = require('./badPlacesOverlay');
 import ToolTip = require('./toolTip');
+
+declare function require(filename: string): string;
+let markerStartFile = require('./icons/marker-start.png')
+
 
 interface Segment {
 	Start: {
@@ -103,8 +106,15 @@ export = class App {
 		//let poly = new L.Polyline([this.startMarker.getLatLng(), this.endMarker.getLatLng()], {
 		let points = new Array<L.LatLng>();
 		points.push(new L.LatLng(route[0].Start.Lat, route[0].End.Lon));
+
+		let dist = 0;
 		route.forEach(p => {
 			points.push(new L.LatLng(p.End.Lat, p.End.Lon))
+			dist += haversine(
+				{ latitude: p.Start.Lat, longitude: p.Start.Lon},
+				{ latitude: p.End.Lat, longitude: p.End.Lon},
+				{unit: 'km'}
+			);
 		})
 		let poly = new L.Polyline(points, {
 			weight: 5
@@ -120,6 +130,16 @@ export = class App {
 		new ToolTip(poly, 'todo');
 
 		document.getElementById('route-details').style.display = 'block';
+		document.getElementById('dist').innerHTML = (Math.round(dist*10)/10) +"km";
+
+		let hours = dist / 12; //Bike at this speed km/h
+		let mins = Math.ceil((hours * 60) % 60);
+		hours = Math.floor(hours);
+		if (hours) {
+			document.getElementById('time').innerHTML = hours + " hours, " + mins + " minutes";
+		} else {
+			document.getElementById('time').innerHTML = mins + " minutes";
+		}
 	}
 
 	reroute(): void {
