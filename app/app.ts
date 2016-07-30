@@ -82,7 +82,7 @@ export = class App {
 			this.btnCircle.classList.remove('active');
 		}
 
-        this.instructionsDiv.innerHTML = '<span>Click on the map to choose your start location</span> <button id="start-at-my-location" class="btn btn-xs btn-success">Start at my Location</button>';
+        this.instructionsDiv.innerHTML = '<span>Click on the map to choose your start location</span> <br/><button id="start-at-my-location" class="btn btn-s btn-success">Start at my Location</button>';
 		document.getElementById('start-at-my-location').addEventListener('click', (ev) => this.createStartMarker(new L.LatLng(-37.787383, 175.319811)));
 
 		this.mode = mode;

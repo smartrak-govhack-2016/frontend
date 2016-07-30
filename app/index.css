@@ -115,3 +115,19 @@ text-shadow: rgb(0, 0, 0) 2px 0px 0px, rgb(0, 0, 0) 1px 0px 0px, rgb(0, 0, 0) 1p
 #btn-safety, #btn-howitworks {
 	width: 120px;
 }
+
+
+
+div.leaflet-top.leaflet-right {
+	z-index: 1001;
+}
+
+@media screen and (max-device-width: 480px) and (orientation: portrait){
+	#logo {
+		width:35px;
+	}
+	#logotext {
+		font-size:35px;
+		top: -12px;
+	}
+}
