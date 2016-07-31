@@ -133,13 +133,17 @@ export = class App {
 
 	findRoute(): void {
 		this.instructionsDiv.innerHTML = "<span>Loading route...</span>";
-		setTimeout(() => this.showRoute(this.myFakeRoute), 1000);
-		//this.realRoute();
+		//setTimeout(() => this.showRoute(this.myFakeRoute), 1000);
+		this.realRoute();
 	}
+
+	latest = 999;
 
 	realRoute(): void {
 		//http://localhost:53167/v1/route/37/175/37/175
 
+		this.latest += 1;
+		let r = this.latest;
 		if (this.mode == 'circle') {
 			$.ajax('http://localhost:53167/v1/circle/' +
 				this.startMarker.getLatLng().lat + "/" +
@@ -148,7 +152,9 @@ export = class App {
 				.done((res) => {
 					//res is the data, like myFakeRoute
 					console.log('done', res);
-					this.showRoute(res);
+					if (r == this.latest) {
+						this.showRoute(res);
+					}
 				});
 		} else {
 			$.ajax('http://localhost:53167/v1/route/' +
