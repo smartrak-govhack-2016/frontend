@@ -438,7 +438,7 @@
 	        this.latest += 1;
 	        var r = this.latest;
 	        if (this.mode == 'circle') {
-	            $.ajax('http://localhost:53167/v1/circle/' +
+	            $.ajax('http://13.73.196.238/v1/circle/' +
 	                this.startMarker.getLatLng().lat + "/" +
 	                this.startMarker.getLatLng().lng + "/", {})
 	                .done(function (res) {
@@ -450,7 +450,7 @@
 	            });
 	        }
 	        else {
-	            $.ajax('http://localhost:53167/v1/route/' +
+	            $.ajax('http://13.73.196.238/v1/route/' +
 	                this.startMarker.getLatLng().lat + "/" +
 	                this.startMarker.getLatLng().lng + "/" +
 	                this.endMarker.getLatLng().lat + "/" +
