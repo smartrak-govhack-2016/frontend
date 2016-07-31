@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+    <link href='https://npmcdn.com/leaflet@1.0.0-rc.1/dist/leaflet.css' rel='stylesheet' />
+    <script src="https://npmcdn.com/leaflet@1.0.0-rc.1/dist/leaflet.js"></script>
+    <script src="./L.Polyline.SnakeAnim.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.4.8/phaser.js"></script>
+
+
+
+    
+        <link href="bundle.css?f8596fd9a17222b3492b" rel="stylesheet">
+        
+</head>
+
+<body>
+
+    <div id="top">
+        <img id="logo" src="ic_directions_bike_white_24px.svg" />
+        <div id="logotext">Bicycle Bicycle</div>
+        <button type="button" id="btn-howitworks" class="btn btn-xs btn-info" data-toggle="modal" data-target="#modal-how-it-works">How it works</button>
+        <a href="https://www.nzta.govt.nz/resources/roadcode/cyclist-code/about-cycling/cyclist-responsibilities/" target="_blank" id="btn-safety" class="btn btn-xs btn-info">Bike Safety Information</a>
+    </div>
+    <div id='map'></div>
+    <div id="phaser"></div>
+    <div id="controls-container">
+        <div class="btn-group" role="group" id="controls" aria-label="...">
+            <button type="button" class="btn btn-default" id="btn-circle">Circular Route</button>
+            <button type="button" class="btn btn-default" id="btn-p2p">Point to Point</button>
+        </div>
+    </div>
+    <div id="instructions-container">
+        <div id="instructions">
+            <span>Click on the map to choose your start location</span><br/>
+            <button id="start-at-my-location" class="btn btn-s btn-success">Start at my Location</button>
+        </div>
+    </div>
+    <div id="route-details">
+        <b>Route Length:</b> <span id="dist">10km</span><br/>
+        <b>Estimated Travel Time:</b> <span id="time">1 hour</span><br/>
+        <b>Speed:</b> <span id="spd">12km/h</span><br/>
+        <a href="#" onclick="alert('coming soon'); return false">Printable Directions Map</a>
+    </div>
+    <!-- Modal: How it Works -->
+    <div class="modal fade" id="modal-how-it-works" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">How it Works</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Bicycle Bicycle provides a way for Bike riders to find safe bike routes.
+                    </p>
+                    <p>
+                        When we make routes, we try to avoid:
+                        <ul>
+                            <li>Known Crash Hotspots</li>
+                            <li>Roundabouts</li>
+                            <li>Highspeed roads</li>
+                        </ul>
+
+                        And we try to send you along:
+                        <ul>
+                            <li>Bicycle Paths</li>
+                            <li>Walkways (that are suitable for cyclists)</li>
+                        </ul>
+                    </p>
+                    <p>
+                        <h4>Data Sources Used</h4>
+                        <ul>
+                            <li><a href="http://openstreetmap.org">OpenStreetMap</a> - Base Map and Routing.</li>
+                            <li><a href="https://www.nzta.govt.nz/safety/safety-resources/crash-analysis-system/">NZTA Crash Analysis System</a> - Avoid Cycle Crashes, Heatmap</li>
+                        </ul>
+                    </p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        <script src="bundle.js?f8596fd9a17222b3492b"></script>
+        
+</body>
+
+</html>
